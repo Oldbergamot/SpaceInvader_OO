@@ -3,12 +3,16 @@ public class Player {
   Position position;
   PImage image;
   float speed;
+  int life;
+  int score;
   
   
   Player() {
-    position = new Position(width/2, height/8*7);
+    position = new Position(width/2, height/10*8);
     this.image = loadImage("player.png");
     this.speed = 10;
+    this.life = 3;
+    this.score = 0;
   }
   void move(Direction direction) {
     if(direction.equals(Direction.LEFT)) this.setPosX(position.getPosX()-speed);
@@ -17,6 +21,10 @@ public class Player {
   
   float getPosX(){
    return this.position.getPosX(); 
+  }
+  
+  float getPosY(){
+    return this.position.getPosY();
   }
   
   void setPosX(float x){
@@ -31,8 +39,17 @@ public class Player {
     image(image, position.getPosX(), position.getPosY());
   }
   
-  void fire() {
-    
+  void removeLife(){
+   this.life--; 
+  }
+  int getLife() {
+   return life; 
+  }
+  void setScore(){
+    this.score++;
+  }
+  int getScore(){
+    return this.score;
   }
   
 }

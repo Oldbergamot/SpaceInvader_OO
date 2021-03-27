@@ -3,9 +3,11 @@ public class Laser {
   Position position;
   boolean fire;
   float speed;
+  float posY;
   
   Laser() {
-   this.position = new Position(player.getPosX(), height/8*7-20);
+   this.posY = player.getPosY()-20;
+   this.position = new Position(player.getPosX(), posY);
    this.fire = false;
    this.speed = 10;
   }
@@ -26,21 +28,23 @@ public class Laser {
       //println(fire);
     }
     if(this.fire && position.getPosY()==0){
-        position.setPosY(height/8*7-20);
+        position.setPosY(posY);
         fire = false;
     }
   }
   
   void resetFire(){
    this.fire = false;
-   this.position = new Position(player.getPosX(), height/8*7-20);
+   this.position = new Position(player.getPosX(), posY);
    
   }
   
   Position getPos() {
    return this.position; 
   }
-
+   float getPosY() {
+     return this.posY;
+   }
   
   boolean getFire() {
     return this.fire;
