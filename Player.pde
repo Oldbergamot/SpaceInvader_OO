@@ -14,9 +14,18 @@ public class Player {
     this.life = 3;
     this.score = 0;
   }
-  void move(Direction direction) {
-    if(direction.equals(Direction.LEFT)) this.setPosX(position.getPosX()-speed);
-    if(direction.equals(Direction.RIGHT)) this.setPosX(position.getPosX()+speed);
+  void move() {  //(Direction direction)
+    if(Direction.RIGHT.getDir() && player.getPosX()<width-25) {
+      //if(direction.equals(Direction.RIGHT)) this.setPosX(position.getPosX()+speed);
+      this.setPosX(position.getPosX()+speed);
+      
+    }
+    if (Direction.LEFT.getDir() && player.getPosX()>25) {
+      //if(direction.equals(Direction.LEFT)) this.setPosX(position.getPosX()-speed);
+      this.setPosX(position.getPosX()-speed);
+      
+    }
+      
   }
   
   float getPosX(){

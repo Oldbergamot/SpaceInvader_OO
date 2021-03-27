@@ -34,6 +34,7 @@ void draw() {
     board.display();
     laser.display();
     player.display();
+    player.move();
     scoreBoard.displayScoreBoard();
   }
   else {
@@ -53,7 +54,22 @@ void displayGameOver(){
 }
 
 void keyPressed() {
-   if (keyPressed == true && key == CODED && keyCode == LEFT && player.getPosX()>25) player.move(Direction.LEFT);
-   if (keyPressed == true && key == CODED && keyCode == RIGHT && player.getPosX()<width-25)player.move(Direction.RIGHT);
-   if (keyPressed && key == 32 && !laser.getFire()) laser.fire();
+   if (keyPressed == true && key == CODED && keyCode == LEFT && player.getPosX()>25) {
+     Direction.RIGHT.setDir(false);
+     Direction.LEFT.setDir(true);     
+     player.move(); //Direction.LEFT
+   }     
+   if (keyPressed == true && key == CODED && keyCode == RIGHT && player.getPosX()<width-25) {
+     Direction.LEFT.setDir(false);
+     Direction.RIGHT.setDir(true);     
+     player.move(); //Direction.RIGHT
+   }     
+   if (keyPressed && key == 32 && !laser.getFire()) {
+     laser.fire();
+   }
+}
+
+void keyReleased() {
+  if (key == CODED && keyCode == LEFT) Direction.LEFT.setDir(false);
+  if (key == CODED && keyCode == RIGHT) Direction.RIGHT.setDir(false); 
 }

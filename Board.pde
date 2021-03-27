@@ -77,9 +77,6 @@ public class Board {
      for (int i = 0 ; i < aliens.length ; i++) {
       for (int j = 0 ; j < nbLine ; j++) {
         aliens[i][j].setPosY(aliens[i][j].getPosY()+75);
-        //println("pos x : "+aliens[i][j].getPosX());
-        //println("pos y : "+aliens[i][j].getPosY());
-        //println("pos player : " + player.getPosY());
       }
      }
     }
