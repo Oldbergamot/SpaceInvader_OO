@@ -29,5 +29,9 @@ How to play :
   You have 3 lifes, if you are hit you loose one and the current wave starts over
   You loose your 3 lifes it's game over
   There's in total 9 waves. Each wave is more powerfull than the last one
-  You win when you've defeated the 9 waves. //not yet implemted
+  You win when you've defeated the 9 waves. 
+
+  Feedbacks are welcomed.
+
+  Enjoy!
   
