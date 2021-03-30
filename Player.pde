@@ -10,7 +10,7 @@ public class Player {
   Player() {
     position = new Position(width/2, height/10*8);
     this.image = loadImage("player.png");
-    this.speed = 10;
+    this.speed = 7.5;
     this.life = 3;
     this.score = 0;
   }

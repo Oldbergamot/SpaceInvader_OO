@@ -25,6 +25,7 @@ void draw() {
   if(!board.isGameOver()){
   
     nbFrame++;
+    println(nbFrame);
     
     background(0);
     laser.update();
