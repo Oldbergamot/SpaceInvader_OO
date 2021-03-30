@@ -7,8 +7,7 @@ public enum AlienType {
   TYPE6(3),
   TYPE7(3),
   TYPE8(3),
-  TYPE9(4); 
-  
+  TYPE9(4);   
   
   int pv;
   

@@ -19,16 +19,13 @@ void setup() {
 }
 
 void draw() {
-  
-  
-  
   if(!board.isGameOver()){
   
     nbFrame++;
     println(nbFrame);
     
     background(0);
-    laser.update();
+    laser.updateLaserPosition();
     board.updateAlienHit();
     board.updateAlienPos();
     
@@ -38,9 +35,9 @@ void draw() {
     player.move();
     scoreBoard.displayScoreBoard();
   }
-  else {
-   displayGameOver(); 
-  }
+  
+  if(board.isGameOver()) displayGameOver();
+  if (player.getScore()==7920) displayWin(); //maximal score
 }
 
 void displayGameOver(){
@@ -51,7 +48,18 @@ void displayGameOver(){
   fill(255);
   textAlign(CENTER);    
   text("Game Over",width/2,height/2);
-  //println("gameover");
+}
+
+void displayWin() {
+  background(0);
+  PFont f;
+  f = createFont("Arial",16,true);
+  textFont(f,72);
+  fill(255);
+  textAlign(CENTER);
+  text("Congratulation!",width/2,height/2);
+  textFont(f,56);
+  text("You've defeated the alien invasion!",width/2,height/10*6);
 }
 
 void keyPressed() {

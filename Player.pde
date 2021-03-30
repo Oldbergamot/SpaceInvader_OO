@@ -4,8 +4,7 @@ public class Player {
   PImage image;
   float speed;
   int life;
-  int score;
-  
+  int score;  
   
   Player() {
     position = new Position(width/2, height/10*8);
@@ -14,18 +13,9 @@ public class Player {
     this.life = 3;
     this.score = 0;
   }
-  void move() {  //(Direction direction)
-    if(Direction.RIGHT.getDir() && player.getPosX()<width-25) {
-      //if(direction.equals(Direction.RIGHT)) this.setPosX(position.getPosX()+speed);
-      this.setPosX(position.getPosX()+speed);
-      
-    }
-    if (Direction.LEFT.getDir() && player.getPosX()>25) {
-      //if(direction.equals(Direction.LEFT)) this.setPosX(position.getPosX()-speed);
-      this.setPosX(position.getPosX()-speed);
-      
-    }
-      
+  void move() {
+    if(Direction.RIGHT.getDir() && player.getPosX()<width-25) this.setPosX(position.getPosX()+speed);
+    if (Direction.LEFT.getDir() && player.getPosX()>25) this.setPosX(position.getPosX()-speed);      
   }
   
   float getPosX(){
@@ -38,10 +28,6 @@ public class Player {
   
   void setPosX(float x){
     this.position.setPosX(x);
-  }  
-   
-  Position getPosition() {
-    return this.position;
   }
   
   void display() {
@@ -51,14 +37,16 @@ public class Player {
   void removeLife(){
    this.life--; 
   }
+  
   int getLife() {
    return life; 
   }
+  
   void setScore(){
     this.score++;
   }
+  
   int getScore(){
     return this.score;
-  }
-  
+  }  
 }

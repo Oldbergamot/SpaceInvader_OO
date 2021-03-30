@@ -16,16 +16,12 @@ public class Laser {
     if(this.fire) {
       fill(#F01111);
       if(position.getPosY()>25) rect(position.getPosX(), position.getPosY(),5,30);
-      
       }
   }
   
-  void update(){
+  void updateLaserPosition(){
     if(position.getPosY() >= 10 && fire) {
       position.setPosY(position.getPosY()-speed);
-      //println(position.getPosX());
-      //println(position.getPosY());
-      //println(fire);
     }
     if(this.fire && position.getPosY()==0){
         position.setPosY(posY);
@@ -33,18 +29,14 @@ public class Laser {
     }
   }
   
-  void resetFire(){
+  void resetLaser(){
    this.fire = false;
-   this.position = new Position(player.getPosX(), posY);
-   
+   this.position = new Position(player.getPosX(), posY);   
   }
   
   Position getPos() {
    return this.position; 
   }
-   float getPosY() {
-     return this.posY;
-   }
   
   boolean getFire() {
     return this.fire;
@@ -54,13 +46,6 @@ public class Laser {
     if(!fire){
       fire = true;
       position.setPosX(player.getPosX());
-      this.updatePosX();
     }
   }
-  
-  void updatePosX(){
-    position.setPosX(player.getPosX());
-  }
-  
-  
 }

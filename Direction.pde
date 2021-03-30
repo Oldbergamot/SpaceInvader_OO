@@ -14,11 +14,5 @@ public enum Direction {
  
  void setDir(boolean b) {
   this.dir=b; 
- }
- 
- static Direction getDirection() {
-   if (Direction.RIGHT.getDir()) return Direction.RIGHT;
-   return Direction.LEFT;
- }
-     
+ }     
 }

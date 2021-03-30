@@ -1,15 +1,16 @@
 public class Board {
+  
   Alien [][] aliens;
   private float[] posX = {50, 150, 250, 350, 450, 550, 650, 750, 850, 950};
   private float[] posY = {75, 150, 225, 300, 375, 450, 525, 600, 675, 750};
   int nbLine;
   int shipPos;
-  int nbWave;
-  
+  int nbWave;  
   boolean levelOver;
   
-  
-  
+  /*
+  board constructor
+  */
   public Board(){
     this.nbLine = 4;
     this.nbWave = 1;
@@ -23,17 +24,6 @@ public class Board {
     }
   }
   
-  Alien [][] getAliens() {
-    return this.aliens;
-  }
-  Alien getAlien(int i , int j) {
-    return aliens[i][j];
-  }
-  
-  void setAliensHit(int i , int j , boolean b){
-   this.aliens[i][j].setIsHit(b); 
-  }
-  
   boolean isGameOver() {
     return (aliens[0][lastLine()].getPosY()>=shipPos && player.getLife() == 0);
   }
@@ -42,9 +32,11 @@ public class Board {
     if(aliens[0][lastLine()].getPosY()>=shipPos) return true;
     return false;
   }
- 
+  
+  /*
+  return the number of the line of the closest alien
+  */
   int lastLine(){
-
    int i =3;
    for ( i = 3 ; i >= 0 ; i--) { //4 lignes donc case 3
       for (int j = 0 ; j < 10 ; j++) {
@@ -54,6 +46,9 @@ public class Board {
    return 0;
   }
   
+  /*
+  display every Alien
+  */
   void display() {
     for (int i = 0 ; i < aliens.length ; i++) {
       for (int j = 0 ; j < nbLine ; j++) {
@@ -62,34 +57,36 @@ public class Board {
     }
   }
   
+  /*
+  update the aliens positions every 6 seconds
+  */
   void updateAlienPos(){
+    
+    if(isWaveOver()) sendNextWave(upDateNbWave());
+    
     /*
     check for frame update
     */
-    if(isWaveOver()) sendNextWave(upDateNbWave());
-   if (nbFrame%360==0 && nbFrame!=0) {
-     if(this.isGameOver()) {
-       levelOver = true;
-     }
-     if (hasAlienReachedPlayer()) {
-       resetWave();
-       player.removeLife();
-     }       
-     else{
-     for (int i = 0 ; i < aliens.length ; i++) {
-      for (int j = 0 ; j < nbLine ; j++) {
-        aliens[i][j].setPosY(aliens[i][j].getPosY()+75);
+    if (nbFrame%360==0 && nbFrame!=0) {
+      if(this.isGameOver()) levelOver = true; //not sure it has to stay there
+      if (hasAlienReachedPlayer()) {
+        resetWave();
+        player.removeLife();
+      }       
+      else{
+      for (int i = 0 ; i < aliens.length ; i++) {
+        for (int j = 0 ; j < nbLine ; j++) {
+          aliens[i][j].setPosY(aliens[i][j].getPosY()+75);
+         }
+        }
       }
-     }
     }
-   }
   }
-  
+     
+  /*
+  set the aliens to their original positions;
+  */
   void resetWave() {
-    test();
-    println(" ");
-    println(lastLine());
-    println("");
     for (int i = 0 ; i < posX.length ; i++) {
       for (int j = 0 ; j < nbLine ; j++) {
         aliens[i][j].setPosX(posX[i]);
@@ -136,50 +133,40 @@ public class Board {
      return true;
   }
   
-  void test () {
-   for ( int i = 3 ; i >= 0 ; i--) { //4 lignes donc case 3
-      for (int j = 0 ; j < 10 ; j++) {
-        println("posX : " +aliens[j][i].getPosX()+ " posY : " +aliens[j][i].getPosY()+ " isHit : " + aliens[j][i].isHit());          
-      }
-    }
-  }
-  
   int upDateNbWave() {
     return ++this.nbWave;
   }
   
-  
-    void updateAlienHit(){
-   float xLaser = laser.getPos().getPosX();
-   float yLaser = laser.getPos().getPosY();
-   Alien[][] aliens = board.getAliens();
-   float xAlien;
-   float yAlien;
-   float minXAlien;
-   float maxXAlien;
-   float minYAlien;
-   float maxYAlien;
-   for (int i = 0 ; i < aliens.length ; i++) {
-     for (int j = 0 ; j < aliens[0].length; j++) {
-       xAlien = aliens[i][j].getPosX();
-       yAlien = aliens[i][j].getPosY();
-       minXAlien = xAlien-33;
-       maxXAlien = xAlien+33;
-       minYAlien = yAlien -23;
-       maxYAlien = yAlien + 23;
-       if(xLaser >= minXAlien && xLaser <= maxXAlien && yLaser >= minYAlien && yLaser <= maxYAlien && laser.getFire()) {
-         //if(!board.getAlien(i,j).isHit()){  
-         if(board.getAlien(i,j).getPv()!=0){ 
-         board.setAliensHit(i , j , true);
-         aliens[i][j].removePv();
-         aliens[i][j].setHitTime(millis());
-         player.setScore();
-         laser.resetFire();         
+  /*
+  check if the trajectory of the laser match with any aliens' position
+  */
+  void updateAlienHit(){
+     float xLaser = laser.getPos().getPosX();
+     float yLaser = laser.getPos().getPosY();
+     float xAlien;
+     float yAlien;
+     float minXAlien;
+     float maxXAlien;
+     float minYAlien;
+     float maxYAlien;
+     for (int i = 0 ; i < aliens.length ; i++) {
+       for (int j = 0 ; j < aliens[0].length; j++) {
+         xAlien = aliens[i][j].getPosX();
+         yAlien = aliens[i][j].getPosY();
+         minXAlien = xAlien-33;
+         maxXAlien = xAlien+33;
+         minYAlien = yAlien -23;
+         maxYAlien = yAlien + 23;
+         if(xLaser >= minXAlien && xLaser <= maxXAlien && yLaser >= minYAlien && yLaser <= maxYAlien && laser.getFire()) {
+           if(aliens[i][j].getPv()!=0){ 
+             aliens[i][j].setIsHit(true);   
+             aliens[i][j].removePv();
+             aliens[i][j].setHitTime(millis());
+             player.setScore();
+             laser.resetLaser();         
+           }
          }
        }
      }
-   }
- }
-
-  
+   }  
 }

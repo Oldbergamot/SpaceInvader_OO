@@ -19,8 +19,7 @@ class ScoreBoard{
     int difference = 3-life;
     for (int i = 1 ; i <= life ; i++) {
      image(heart, 100*i,900);
-    }
-    
+    }    
     switch (difference) {
       case 1 : 
         image(noHeart,300,900);
@@ -34,8 +33,7 @@ class ScoreBoard{
         image(noHeart,200,900);
         image(noHeart,100,900);
         break;
-    }
-    
+    }    
   }
   
   void displayScoreBoard() {
