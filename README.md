@@ -31,7 +31,7 @@ How to play :
   There's in total 9 waves. Each wave is more powerfull than the last one
   You win when you've defeated the 9 waves. 
 
-  Feedbacks are welcomed.
+  Feedbacks are welcome.
 
   Enjoy!
   
